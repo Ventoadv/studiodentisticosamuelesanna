@@ -322,7 +322,10 @@
       gsap.utils.toArray(".cta-video").forEach(sec => {
         const scrub = { trigger: sec, start: "top bottom", end: "bottom top", scrub: true };
         const mark = sec.querySelector(".cta-mark");
-        gsap.fromTo(sec.querySelector(".cta-media"), { yPercent: -16, scale: 1.2 }, { yPercent: 16, scale: 1, ease: "none", scrollTrigger: scrub });
+        // con lo sfondo fisso il media non deve muoversi
+        if (!sec.classList.contains("cta-video--fixed")) {
+          gsap.fromTo(sec.querySelector(".cta-media"), { yPercent: -16, scale: 1.2 }, { yPercent: 16, scale: 1, ease: "none", scrollTrigger: scrub });
+        }
         gsap.fromTo(mark, { y: 220, rotate: sec.classList.contains("cta-video--final") ? 18 : -18 }, { y: -220, rotate: 0, ease: "none", scrollTrigger: scrub });
         // l'overlay si schiarisce un poco quando la sezione è al centro dello schermo
         gsap.fromTo(sec.querySelector(".cta-overlay"), { opacity: .95 }, {

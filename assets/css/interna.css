@@ -1,0 +1,207 @@
+/* Studio Dentistico Dott. Samuele Sanna — pagine interne (servizi)
+   Si carica dopo style.css e ne riusa variabili, bottoni, header, footer, zig-zag, CTA e widget. */
+
+.page-interna .site-header:not(.is-solid) { background: transparent; }
+
+/* Focus oro anche sulle sezioni blu delle pagine interne */
+.page-hero :focus-visible, .tech :focus-visible { outline-color: var(--oro); }
+
+.eyebrow { margin-bottom: 1rem; color: var(--oro); font-size: .9375rem; letter-spacing: .1em; text-transform: uppercase; }
+.eyebrow--dark { color: var(--oro-testo); }
+.block-head { margin-bottom: clamp(2.5rem, 5vw, 3.5rem); max-width: 46rem; }
+.block-head--center { margin-inline: auto; text-align: center; }
+.block-head--center .section-lead { margin-inline: auto; }
+.section-title--light { color: var(--bianco); }
+.section-lead--light { color: var(--sabbia); }
+
+/* ---------- Hero interno ---------- */
+.page-hero {
+  position: relative; overflow: hidden;
+  background: var(--blu-foto); color: var(--sabbia);
+  padding-top: var(--header-h);
+}
+.page-hero-mark {
+  position: absolute; right: -10vw; top: 45%; width: min(60vw, 720px); height: auto;
+  transform: translateY(-50%); opacity: .08; pointer-events: none;
+}
+.page-hero-grid {
+  position: relative; max-width: 1440px; margin-inline: auto; padding: clamp(2.5rem, 6vw, 5rem) var(--gutter) clamp(3rem, 6vw, 5rem);
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 5vw, 5rem);
+}
+.page-hero-copy { max-width: 640px; }
+.page-title { font-size: clamp(2.5rem, 1.2rem + 4vw, 4.5rem); font-weight: 300; color: var(--bianco); line-height: 1.05; margin-bottom: 1.5rem; }
+.page-lead { font-size: 1.1875rem; font-weight: 300; color: var(--sabbia); max-width: 34em; margin-bottom: 2.25rem; }
+.page-hero-media { border-radius: var(--radius-l); overflow: hidden; aspect-ratio: 4 / 3.4; box-shadow: 0 30px 60px rgba(0, 0, 0, .25); }
+.page-hero-media .ph { border: 1px solid rgba(215, 180, 106, .25); border-radius: inherit; }
+
+.breadcrumb { margin-bottom: 2rem; font-family: var(--font-info); font-weight: 300; font-size: .875rem; letter-spacing: .03em; }
+.breadcrumb ol { display: flex; flex-wrap: wrap; gap: .25rem .5rem; margin: 0; padding: 0; list-style: none; }
+.breadcrumb li + li::before { content: "/"; margin-right: .5rem; color: var(--oro); }
+.breadcrumb a { text-decoration: none; }
+.breadcrumb a:hover { color: var(--oro); text-decoration: underline; }
+.breadcrumb [aria-current] { color: rgba(239, 227, 198, .75); }
+
+@media (max-width: 900px) {
+  .page-hero-grid { grid-template-columns: 1fr; }
+  .page-hero-mark { width: 120vw; right: -50vw; top: 30%; }
+}
+@media (max-width: 520px) {
+  .page-hero .hero-ctas .btn { width: 100%; }
+}
+
+/* ---------- Indice della pagina (ancore) ---------- */
+.page-toc {
+  position: sticky; top: var(--header-h); z-index: 40;
+  background: var(--avorio); border-bottom: 1px solid rgba(10, 28, 62, .1);
+}
+.page-toc ul { display: flex; gap: .25rem; overflow-x: auto; scrollbar-width: none; }
+.page-toc ul::-webkit-scrollbar { display: none; }
+.page-toc a {
+  display: block; padding: 1rem .9rem; white-space: nowrap; font-size: .9375rem; text-decoration: none; color: var(--ardesia);
+  border-bottom: 2px solid transparent; transition: color .2s, border-color .2s;
+}
+.page-toc a:hover { color: var(--blu-notte); }
+.page-toc a.is-active { color: var(--blu-notte); border-bottom-color: var(--oro-testo); }
+:where(.page-interna) section[id] { scroll-margin-top: calc(var(--header-h) + 64px); }
+
+/* ---------- Intro + schema ---------- */
+.intro { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
+.intro-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: center; }
+.intro-text .section-lead { margin-bottom: 1.25rem; color: var(--antracite); }
+.intro-text p:not(.section-lead) { color: var(--ardesia); max-width: 36em; }
+
+.implant-diagram { display: grid; grid-template-columns: minmax(140px, 210px) 1fr; gap: 2rem; align-items: center; padding: 2rem; background: var(--avorio); border-radius: 24px; }
+.implant-diagram svg { width: 100%; height: auto; overflow: visible; }
+.d-bone { fill: var(--sabbia); }
+.d-gum { fill: #E7C9BC; }
+.d-implant path:first-child { fill: #A9B2C1; stroke: var(--blu-notte); stroke-width: 1.5; }
+.d-thread { fill: none; stroke: var(--blu-notte); stroke-width: 1.5; stroke-linecap: round; }
+.d-abutment { fill: #C9CFD9; stroke: var(--blu-notte); stroke-width: 1.5; }
+.d-crown { fill: var(--bianco); stroke: var(--blu-notte); stroke-width: 1.5; }
+.d-labels path { stroke: var(--oro-testo); stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+.d-labels circle { fill: var(--blu-notte); }
+.d-labels text { fill: var(--oro); font: 500 13px var(--font); text-anchor: middle; }
+.diagram-legend { margin: 0 0 1rem; padding: 0; list-style: none; counter-reset: leg; }
+.diagram-legend li { counter-increment: leg; position: relative; padding-left: 2.5rem; font-size: var(--fs-sm); color: var(--ardesia); }
+.diagram-legend li + li { margin-top: 1rem; }
+.diagram-legend li::before {
+  content: counter(leg); position: absolute; left: 0; top: .1rem;
+  width: 1.75rem; height: 1.75rem; display: grid; place-items: center;
+  background: var(--blu-notte); color: var(--oro); border-radius: 50%; font-size: .8125rem;
+}
+.diagram-legend strong { display: block; font-weight: 500; color: var(--blu-notte); }
+.diagram-note { margin: 0; font-size: .8125rem; color: var(--ardesia); }
+
+@media (max-width: 960px) {
+  .intro-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .implant-diagram { grid-template-columns: 1fr; padding: 1.5rem; }
+  .implant-diagram svg { max-width: 220px; margin-inline: auto; }
+}
+
+/* ---------- Soluzioni ---------- */
+.solutions { padding-block: clamp(4.5rem, 9vw, 7.5rem); background: var(--avorio); }
+.solution-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.solution-card {
+  display: flex; flex-direction: column; padding: 2.25rem 2rem;
+  background: var(--bianco); border: 1px solid rgba(10, 28, 62, .1); border-radius: 24px;
+  transition: border-color .3s var(--ease), transform .3s var(--ease);
+}
+.solution-card:hover { border-color: var(--oro-testo); }
+.solution-num { font-size: 2.75rem; font-weight: 300; line-height: 1; color: var(--oro-testo); margin-bottom: 3rem; }
+.solution-card h3 { font-size: 1.5rem; font-weight: 400; color: var(--blu-notte); margin-bottom: .5rem; }
+.solution-for { font-size: .9375rem; font-weight: 500; color: var(--oro-testo); margin-bottom: 1rem; }
+.solution-card p:last-child { margin: 0; color: var(--ardesia); font-size: var(--fs-sm); }
+.solution-card .tbd { font-size: .55em; color: var(--ardesia); }
+
+@media (max-width: 960px) {
+  .solution-grid { grid-template-columns: 1fr; }
+  .solution-num { margin-bottom: 1.5rem; }
+}
+
+/* ---------- Chirurgia avanzata ---------- */
+.surgery { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
+.surgery-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+.surgery-head { position: sticky; top: calc(var(--header-h) + 90px); }
+.surgery-head .block-head, .surgery-head .section-lead { margin-bottom: 1rem; }
+.tbd-note { color: var(--ardesia); }
+.surgery-list { border-top: 1px solid rgba(10, 28, 62, .14); }
+.surgery-list li { padding: 1.75rem 0 1.75rem 3.25rem; border-bottom: 1px solid rgba(10, 28, 62, .14); position: relative; }
+.surgery-list li::before {
+  content: ""; position: absolute; left: 0; top: 2.05rem; width: 1.75rem; height: 1px; background: var(--oro-testo);
+}
+.surgery-list h3 { font-size: var(--fs-h3); font-weight: 400; color: var(--blu-notte); margin-bottom: .5rem; }
+.surgery-list p { margin: 0; color: var(--ardesia); }
+
+@media (max-width: 900px) {
+  .surgery-grid { grid-template-columns: 1fr; }
+  .surgery-head { position: static; }
+}
+
+/* ---------- Percorso (timeline) ---------- */
+.journey { padding-block: clamp(4.5rem, 9vw, 7.5rem); background: var(--avorio); }
+.timeline { --line: 0; position: relative; max-width: 860px; margin: 0 auto; padding: 0; list-style: none; }
+.timeline::before, .timeline::after {
+  content: ""; position: absolute; left: 50%; top: .5rem; bottom: .5rem; width: 2px; margin-left: -1px;
+  background: rgba(10, 28, 62, .12);
+}
+.timeline::after { background: var(--oro-testo); transform-origin: top; transform: scaleY(var(--line)); }
+.step { position: relative; width: 50%; padding: 0 3rem 3.5rem 0; text-align: right; }
+.step:nth-child(even) { margin-left: 50%; padding: 0 0 3.5rem 3rem; text-align: left; }
+.step:last-child { padding-bottom: 0; }
+.step-dot {
+  position: absolute; top: .35rem; right: -9px; z-index: 1;
+  width: 18px; height: 18px; border-radius: 50%; background: var(--avorio); border: 2px solid var(--oro-testo);
+  transition: background-color .3s;
+}
+.step:nth-child(even) .step-dot { right: auto; left: -9px; }
+.step.is-reached .step-dot { background: var(--blu-notte); border-color: var(--blu-notte); box-shadow: 0 0 0 4px var(--sabbia); }
+.step-when { margin-bottom: .25rem; font-size: .875rem; letter-spacing: .06em; text-transform: uppercase; color: var(--oro-testo); }
+.step h3 { font-size: var(--fs-h3); font-weight: 400; color: var(--blu-notte); margin-bottom: .5rem; }
+.step p:last-child { margin: 0; color: var(--ardesia); font-size: var(--fs-sm); }
+
+@media (max-width: 760px) {
+  .timeline::before, .timeline::after { left: 8px; }
+  .step, .step:nth-child(even) { width: auto; margin-left: 0; padding: 0 0 2.5rem 2.75rem; text-align: left; }
+  .step-dot, .step:nth-child(even) .step-dot { left: 0; right: auto; }
+}
+
+/* ---------- Comfort ---------- */
+.story--tight { padding-block: clamp(4.5rem, 9vw, 7.5rem); background: var(--avorio); }
+.check-list { margin: 0 0 1.25rem; }
+.check-list li { position: relative; padding-left: 2rem; margin-bottom: .6rem; }
+.check-list li::before {
+  content: ""; position: absolute; left: .2rem; top: .45em; width: .9rem; height: .5rem;
+  border-left: 2px solid var(--oro-testo); border-bottom: 2px solid var(--oro-testo); transform: rotate(-45deg);
+}
+
+/* ---------- Tecnologia ---------- */
+.tech { position: relative; overflow: hidden; isolation: isolate; padding-block: clamp(4.5rem, 9vw, 7.5rem); background: var(--blu-notte); color: var(--sabbia); }
+.tech-mark { position: absolute; z-index: -1; left: -12vw; bottom: -20%; width: min(55vw, 640px); height: auto; opacity: .07; pointer-events: none; }
+.tech-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.tech-card { padding: 1rem 1rem 1.75rem; background: var(--blu-medio); border-radius: 20px; }
+.ph--small { aspect-ratio: 4 / 3; height: auto; border-radius: 14px; margin-bottom: 1.5rem; font-size: .8125rem; gap: .75rem; }
+.ph--small img { width: 44px; }
+.tech-card h3 { padding-inline: .75rem; font-size: 1.25rem; font-weight: 400; color: var(--bianco); margin-bottom: .6rem; }
+.tech-card h3 .tbd { color: var(--sabbia); font-size: .6em; }
+.tech-card p { padding-inline: .75rem; margin: 0; font-size: var(--fs-sm); color: var(--sabbia); }
+.tech-foot { margin: 2rem 0 0; font-size: var(--fs-sm); color: var(--sabbia); }
+
+@media (max-width: 960px) {
+  .tech-grid { grid-template-columns: 1fr; max-width: 520px; }
+}
+
+/* ---------- Casi clinici prima/dopo ---------- */
+.cases { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
+.case-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.case-card { padding: 1rem 1rem 1.75rem; background: var(--avorio); border-radius: 20px; }
+.case-pair { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-bottom: 1.5rem; }
+.case-pair .ph--small { margin: 0; font-size: .875rem; letter-spacing: .08em; text-transform: uppercase; }
+.case-card h3 { padding-inline: .75rem; font-size: 1.25rem; font-weight: 400; color: var(--blu-notte); margin-bottom: .5rem; }
+.case-card p { padding-inline: .75rem; margin: 0; font-size: var(--fs-sm); color: var(--ardesia); }
+.cases-note { margin: 1.5rem 0 0; font-size: .8125rem; color: var(--ardesia); }
+
+@media (max-width: 760px) {
+  .case-grid { grid-template-columns: 1fr; }
+}

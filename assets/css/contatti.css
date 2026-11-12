@@ -1,0 +1,137 @@
+/* Studio Dentistico Dott. Samuele Sanna — pagina Contatti
+   Si carica dopo style.css e interna.css (ne riusa variabili, hero, indice, bottoni, check-list). */
+
+/* ---------- Recapiti e orari ---------- */
+.contact-info { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
+.contact-info-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+.contact-info .block-head { margin-bottom: 2.5rem; }
+
+.contact-list { border-top: 1px solid rgba(10, 28, 62, .14); }
+.contact-item { display: grid; grid-template-columns: 48px 1fr; gap: 1.25rem; padding-block: 1.75rem; border-bottom: 1px solid rgba(10, 28, 62, .14); }
+.contact-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--avorio); color: var(--oro-testo); }
+.contact-icon svg { width: 22px; height: 22px; fill: currentColor; }
+.contact-item h3 { font-size: .9375rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--oro-testo); margin-bottom: .35rem; }
+.contact-value { margin: 0 0 .35rem; font-family: var(--font-info); font-weight: 300; font-size: 1.375rem; letter-spacing: .03em; color: var(--blu-notte); overflow-wrap: anywhere; }
+.contact-value a { text-decoration: none; }
+.contact-value a:hover { color: var(--oro-testo); text-decoration: underline; text-underline-offset: 4px; }
+.contact-value .tbd { font-family: var(--font); font-size: .55em; color: var(--ardesia); letter-spacing: 0; }
+.contact-note { margin: 0; font-size: var(--fs-sm); color: var(--ardesia); }
+.contact-note .tbd { font-size: .8em; }
+
+.hours-card {
+  position: sticky; top: calc(var(--header-h) + 80px);
+  padding: clamp(1.75rem, 3vw, 2.5rem); border-radius: 24px;
+  background: var(--blu-notte); color: var(--sabbia);
+}
+.hours-card :focus-visible { outline-color: var(--oro); }
+.hours-title { font-size: 1.75rem; font-weight: 300; color: var(--bianco); margin-bottom: .75rem; }
+.hours-flag { margin-bottom: 1.25rem; font-size: var(--fs-sm); }
+.hours-table { width: 100%; border-collapse: collapse; font-family: var(--font-info); font-weight: 300; letter-spacing: .03em; }
+.hours-table th, .hours-table td { padding: .7rem 0; border-bottom: 1px solid rgba(215, 180, 106, .22); vertical-align: top; }
+.hours-table th { text-align: left; font-weight: 400; color: var(--oro); font-family: var(--font); letter-spacing: .02em; }
+.hours-table td { text-align: right; color: var(--bianco); line-height: 1.5; }
+.hours-note { margin: 1.25rem 0 1.5rem; font-size: var(--fs-sm); }
+.hours-card .btn { width: 100%; }
+
+@media (max-width: 960px) {
+  .contact-info-grid { grid-template-columns: 1fr; }
+  .hours-card { position: static; }
+}
+
+/* ---------- Modulo richiesta appuntamento ---------- */
+.booking { padding-block: clamp(4.5rem, 9vw, 7.5rem); background: var(--avorio); }
+.booking-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+.booking-intro { position: sticky; top: calc(var(--header-h) + 80px); }
+.booking-steps { margin: 2rem 0; padding: 0; list-style: none; counter-reset: bs; }
+.booking-steps li { counter-increment: bs; position: relative; padding-left: 3rem; color: var(--ardesia); }
+.booking-steps li + li { margin-top: 1rem; }
+.booking-steps li::before {
+  content: counter(bs); position: absolute; left: 0; top: -.1rem;
+  display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%;
+  border: 1px solid var(--oro-testo); color: var(--oro-testo); font-size: .9375rem;
+}
+.booking-steps strong { font-weight: 500; color: var(--blu-notte); }
+.booking-steps .tbd { font-size: .7em; }
+.booking-urgent { margin: 0; padding: 1rem 1.25rem; border-left: 3px solid var(--oro-testo); background: var(--bianco); border-radius: 0 12px 12px 0; color: var(--antracite); }
+.booking-urgent strong { font-weight: 500; color: var(--blu-notte); }
+.booking-urgent a { color: var(--blu-notte); font-weight: 500; }
+
+.booking-form { padding: clamp(1.75rem, 4vw, 3rem); background: var(--bianco); border: 1px solid rgba(10, 28, 62, .1); border-radius: 24px; }
+.form-required { margin-bottom: 1.5rem; font-size: .875rem; color: var(--ardesia); }
+.req { color: var(--oro-testo); }
+.field { margin: 0 0 1.25rem; padding: 0; border: 0; min-width: 0; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+.field label, .field legend { display: block; margin-bottom: .4rem; font-weight: 500; font-size: .9375rem; color: var(--blu-notte); }
+.field-optional { font-weight: 400; color: var(--ardesia); }
+.field input[type="text"], .field input[type="tel"], .field input[type="email"], .field select, .field textarea {
+  width: 100%; min-height: 50px; padding: .7rem 1rem;
+  font: inherit; font-size: 1rem; color: var(--antracite);
+  background: var(--bianco); border: 1px solid #8C94A3; border-radius: 10px;
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.field textarea { resize: vertical; min-height: 120px; }
+.field select { appearance: none; padding-right: 2.75rem; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5 6 8l4-3.5' fill='none' stroke='%230A1C3E' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; }
+.field input:hover, .field select:hover, .field textarea:hover { border-color: var(--blu-notte); }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--blu-notte); outline-offset: 1px; border-color: var(--blu-notte); }
+.field input:user-invalid, .field textarea:user-invalid { border-color: #B42318; }
+.field-hint { margin: .4rem 0 0; font-size: .8125rem; color: var(--ardesia); }
+
+.choice-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+.choice { position: relative; display: inline-flex !important; align-items: center; margin: 0 !important; cursor: pointer; }
+.choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.choice span { display: inline-block; padding: .55rem 1.1rem; border: 1px solid #8C94A3; border-radius: 999px; font-weight: 400; color: var(--antracite); transition: background-color .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease); }
+.choice:hover span { border-color: var(--blu-notte); }
+.choice input:checked + span { background: var(--blu-notte); border-color: var(--blu-notte); color: var(--bianco); }
+.choice input:focus-visible + span { outline: 2px solid var(--blu-notte); outline-offset: 3px; }
+
+.field-consent { margin-top: 1.75rem; }
+.consent { display: grid !important; grid-template-columns: 22px 1fr; gap: .75rem; align-items: start; font-weight: 400 !important; font-size: .875rem !important; color: var(--ardesia) !important; line-height: 1.55; }
+.consent input { width: 20px; height: 20px; margin: .1rem 0 0; accent-color: var(--blu-notte); }
+.consent a { color: var(--blu-notte); }
+.booking-submit { width: 100%; margin-top: .5rem; }
+.form-status { margin: 1rem 0 0; font-size: var(--fs-sm); color: var(--blu-notte); }
+.form-status:empty { display: none; }
+.form-status.is-ok { padding: 1rem 1.25rem; background: var(--sabbia); border-radius: 12px; }
+
+@media (max-width: 960px) {
+  .booking-grid { grid-template-columns: 1fr; }
+  .booking-intro { position: static; }
+}
+@media (max-width: 560px) {
+  .field-row { grid-template-columns: 1fr; }
+}
+
+/* ---------- Mappa e come arrivare ---------- */
+.find-us { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
+.find-us-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(2.5rem, 6vw, 5rem); align-items: stretch; }
+.find-us-text .section-lead { margin-bottom: 1.5rem; }
+.find-us-text .check-list { margin-bottom: 2rem; color: var(--antracite); }
+.find-us-text .check-list .tbd { font-size: .7em; color: var(--ardesia); }
+.studio-data { margin-top: 2.5rem; padding-top: 1.75rem; border-top: 1px solid rgba(10, 28, 62, .14); }
+.studio-data h3 { font-size: .9375rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--oro-testo); margin-bottom: .75rem; }
+.studio-data p { margin: 0; font-family: var(--font-info); font-weight: 300; font-size: .9375rem; line-height: 1.8; color: var(--antracite); }
+.studio-data .tbd { font-family: var(--font); color: var(--ardesia); }
+
+.map-box {
+  position: relative; min-height: 460px; border-radius: 24px; overflow: hidden;
+  background: radial-gradient(circle at 30% 20%, var(--blu-medio), var(--blu-notte) 70%);
+}
+.map-box iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.map-consent {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 2rem; text-align: center; color: var(--sabbia);
+}
+.map-consent :focus-visible { outline-color: var(--oro); }
+.map-pin { width: 44px; height: 44px; fill: var(--oro); margin-bottom: 1rem; }
+.map-consent .map-consent-title { margin-bottom: .5rem; max-width: none; font-size: 1.5rem; font-weight: 300; color: var(--bianco); }
+.map-consent p { max-width: 30em; font-size: var(--fs-sm); }
+.map-consent a:not(.btn) { color: var(--sabbia); }
+.map-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; margin-top: .75rem; }
+
+@media (max-width: 960px) {
+  .find-us-grid { grid-template-columns: 1fr; }
+  .map-box { min-height: 380px; }
+}
+@media (max-width: 520px) {
+  .map-actions .btn { width: 100%; }
+}

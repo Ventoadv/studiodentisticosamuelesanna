@@ -117,6 +117,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .nav-list > li > a:hover, .sub-toggle:hover, .nav-list a[aria-current="page"] { color: var(--oro); }
 .nav-list a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+/* Voci principali del menu in maiuscolo (le voci del sottomenu restano in minuscolo) */
+.nav-list > li > a, .sub-toggle { text-transform: uppercase; font-size: .8125rem; font-weight: 400; letter-spacing: .09em; }
 .has-sub { position: relative; }
 .sub-toggle svg { transition: transform .25s var(--ease); }
 .sub-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
@@ -152,7 +154,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .header-cta, .header-phone, .header-phone svg, .sub-toggle svg { flex: none; white-space: nowrap; }
 @media (max-width: 1600px) {
   .header-phone span { display: none; }
-  .nav-list > li > a, .sub-toggle { padding-inline: .6rem; }
+  .nav-list > li > a, .sub-toggle { padding-inline: .5rem; font-size: .75rem; letter-spacing: .06em; }
 }
 @media (max-width: 1399px) {
   :root { --header-h: 72px; }
@@ -171,7 +173,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .site-header.menu-open { background: var(--blu-notte); }
   .nav-list { flex-direction: column; align-items: stretch; gap: 0; }
   .nav-list > li { border-bottom: 1px solid rgba(215, 180, 106, .18); }
-  .nav-list > li > a, .sub-toggle { width: 100%; justify-content: space-between; padding: 1rem 0; font-size: 1.375rem; font-weight: 300; }
+  .nav-list > li > a, .sub-toggle { width: 100%; justify-content: space-between; padding: 1rem 0; font-size: 1.125rem; font-weight: 300; letter-spacing: .08em; }
   .sub-menu { position: static; display: none; opacity: 1; visibility: visible; transform: none; border: 0; padding: 0 0 1rem 1rem; min-width: 0; }
   .has-sub.is-open .sub-menu { display: block; }
   .sub-menu a { font-size: 1.0625rem; }
@@ -202,9 +204,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .hero-copy { align-self: center; padding-block: 3rem 4rem; max-width: 620px; }
 .hero-place { margin-bottom: 1.5rem; color: var(--oro); font-size: 1rem; letter-spacing: .08em; }
+/* Stesso font e scala dell'H1 delle pagine interne (.page-title), con peso più marcato */
 .hero-title {
-  font-family: var(--font-claim); font-size: var(--fs-h1); font-weight: 700;
-  letter-spacing: .08em; line-height: .95;
+  font-family: var(--font); font-size: clamp(2.5rem, 1.2rem + 4vw, 4.5rem); font-weight: 500;
+  letter-spacing: 0; line-height: 1.05;
   color: var(--crema); margin-bottom: 1.75rem;
 }
 .hero-title .line { display: block; overflow: hidden; padding-bottom: .08em; white-space: nowrap; }
@@ -348,6 +351,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .svc-panel--list { background: var(--blu-medio); }
 .svc-bg { position: absolute; inset: 0; border-radius: 0; transition: transform 1.2s var(--ease), opacity .6s var(--ease); }
 .svc-bg.ph { justify-content: flex-start; padding-top: 3.5rem; }
+/* Card chiusa: icona del servizio in alto; card aperta: resta solo l'icona sopra il titolo */
+.svc-closed-icon { width: 56px; height: 56px; stroke: var(--oro); transition: opacity .4s var(--ease); }
+.svc-panel.is-active .svc-closed-icon { opacity: 0; }
+.svc-panel:not(.is-active) .svc-bg { opacity: 1; }
+.svc-panel:not(.is-active) .svc-bg { background: var(--blu-notte); }
+.svc-panel--list:not(.is-active) .svc-bg { background: var(--blu-medio); }
 .svc-bg span { font-size: .8125rem; }
 .svc-panel:not(.is-active) .svc-bg { opacity: .55; }
 .svc-panel.is-active .svc-bg { transform: scale(1.04); }
@@ -387,12 +396,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .svc-panel :focus-visible { outline-color: var(--oro); }
 
 @media (max-width: 860px) {
-  /* Su mobile niente fisarmonica: tre card una sotto l'altra, tutte aperte */
+  /* Su mobile niente fisarmonica: le card una sotto l'altra, tutte aperte */
   .svc-accordion { flex-direction: column; height: auto; }
   .svc-panel, .svc-panel.is-active { flex: none; cursor: auto; }
   .svc-panel .svc-bg { position: relative; height: 210px; opacity: 1; transform: none; padding-top: 2rem; }
   .svc-panel::after { bottom: auto; height: 210px; background: linear-gradient(0deg, rgba(10, 28, 62, .9) 0%, rgba(10, 28, 62, 0) 60%); }
-  .svc-label { display: none; }
+  .svc-label, .svc-closed-icon { display: none; }
   .svc-body, .svc-panel .svc-body { position: relative; opacity: 1; transform: none; visibility: visible; transition: none; margin-top: -2.5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -575,6 +584,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* ---------- Footer ---------- */
 .site-footer { background: var(--blu-notte); color: var(--sabbia); padding-top: clamp(3.5rem, 7vw, 5.5rem); font-size: var(--fs-sm); }
+/* CTA prima visita dentro il footer: presente in tutte le pagine, il padding passa alla griglia sotto */
+.site-footer:has(.footer-cta) { padding-top: 0; }
+.footer-cta { font-size: var(--fs-base); }
+.footer-cta + .footer-grid { padding-top: clamp(3.5rem, 7vw, 5.5rem); border-top: 1px solid rgba(215, 180, 106, .25); }
 .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 2.5rem; padding-bottom: 3rem; }
 .footer-brand img { width: 260px; height: auto; margin-bottom: 1.5rem; }
 .footer-brand address { font-family: var(--font-info); font-weight: 300; letter-spacing: .04em; line-height: 1.8; margin-bottom: 1.25rem; }

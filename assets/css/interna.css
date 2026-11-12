@@ -106,7 +106,12 @@
 .solution-card {
   display: flex; flex-direction: column; padding: 2.25rem 2rem;
   background: var(--bianco); border: 1px solid rgba(10, 28, 62, .1); border-radius: 24px;
-  transition: border-color .3s var(--ease), transform .3s var(--ease);
+  transition: border-color .3s var(--ease);
+}
+/* Card allineate: numero, titolo, sottotitolo e testo partono alla stessa altezza in tutte le colonne */
+@supports (grid-template-rows: subgrid) {
+  .solution-grid { grid-template-rows: auto auto auto 1fr; row-gap: 0; }
+  .solution-card { display: grid; grid-row: span 4; grid-template-rows: subgrid; align-content: start; }
 }
 .solution-card:hover { border-color: var(--oro-testo); }
 .solution-num { font-size: 2.75rem; font-weight: 300; line-height: 1; color: var(--oro-testo); margin-bottom: 3rem; }
@@ -116,7 +121,8 @@
 .solution-card .tbd { font-size: .55em; color: var(--ardesia); }
 
 @media (max-width: 960px) {
-  .solution-grid { grid-template-columns: 1fr; }
+  .solution-grid { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 1.25rem; }
+  .solution-card { display: flex; grid-row: auto; }
   .solution-num { margin-bottom: 1.5rem; }
 }
 
@@ -141,17 +147,21 @@
 
 /* ---------- Percorso (timeline) ---------- */
 .journey { padding-block: clamp(4.5rem, 9vw, 7.5rem); background: var(--avorio); }
+/* La .journey della home (style.css) è su fondo blu: nelle pagine interne il percorso è su avorio */
+.page-interna .journey { color: var(--antracite); }
+.page-interna .journey .section-title { color: var(--blu-notte); }
+.page-interna .journey .section-lead { color: var(--ardesia); margin-bottom: 0; }
 .timeline { --line: 0; position: relative; max-width: 860px; margin: 0 auto; padding: 0; list-style: none; }
 .timeline::before, .timeline::after {
   content: ""; position: absolute; left: 50%; top: .5rem; bottom: .5rem; width: 2px; margin-left: -1px;
-  background: rgba(10, 28, 62, .12);
+  background: rgba(10, 28, 62, .12); z-index: 0;
 }
 .timeline::after { background: var(--oro-testo); transform-origin: top; transform: scaleY(var(--line)); }
-.step { position: relative; width: 50%; padding: 0 3rem 3.5rem 0; text-align: right; }
+.step { position: relative; z-index: 1; width: 50%; padding: 0 3rem 3.5rem 0; text-align: right; }
 .step:nth-child(even) { margin-left: 50%; padding: 0 0 3.5rem 3rem; text-align: left; }
 .step:last-child { padding-bottom: 0; }
 .step-dot {
-  position: absolute; top: .35rem; right: -9px; z-index: 1;
+  position: absolute; top: .35rem; right: -9px; z-index: 1; box-sizing: border-box;
   width: 18px; height: 18px; border-radius: 50%; background: var(--avorio); border: 2px solid var(--oro-testo);
   transition: background-color .3s;
 }
@@ -205,3 +215,17 @@
 @media (max-width: 760px) {
   .case-grid { grid-template-columns: 1fr; }
 }
+
+/* ---------- Parodontologia: schema gengiva sana / parodontite ---------- */
+.d-heads text { fill: var(--ardesia); font: 500 12px var(--font); text-anchor: middle; letter-spacing: .04em; text-transform: uppercase; }
+.d-heads path { stroke: rgba(10, 28, 62, .25); stroke-dasharray: 3 3; fill: none; }
+.d-gum--sick { fill: #D9897B; }
+.d-pocket { fill: #6B2E2A; opacity: .55; }
+.d-tartar circle { fill: var(--oro-testo); }
+
+/* Tecnologia con due card */
+.tech-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 880px; }
+@media (max-width: 760px) { .tech-grid--2 { grid-template-columns: 1fr; } }
+
+/* Link all'indirizzo nella CTA del footer */
+.cta-lead a { color: inherit; text-decoration: underline; text-decoration-color: var(--oro); text-underline-offset: .2em; }

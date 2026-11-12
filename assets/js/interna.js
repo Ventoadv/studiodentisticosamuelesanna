@@ -70,7 +70,7 @@
 
       // Schema dell'impianto: i pezzi si montano dal basso verso l'alto
       const d = ".implant-diagram";
-      gsap.timeline({ scrollTrigger: { trigger: d, start: "top 75%", once: true }, defaults: { ease: "power3.out" } })
+      if (document.querySelector(d + " .d-implant")) gsap.timeline({ scrollTrigger: { trigger: d, start: "top 75%", once: true }, defaults: { ease: "power3.out" } })
         .from(d + " .d-bone, " + d + " .d-gum", { opacity: 0, y: 20, duration: .7, stagger: .1 })
         .from(d + " .d-implant", { y: -90, opacity: 0, duration: .9 }, "-=.2")
         .from(d + " .d-abutment", { y: -50, opacity: 0, duration: .6 }, "-=.3")
@@ -78,11 +78,30 @@
         .from(d + " .d-labels > *", { opacity: 0, duration: .4, stagger: .05 }, "-=.3")
         .from(".diagram-legend li", { opacity: 0, x: 16, duration: .5, stagger: .12 }, "<");
 
+      // Schema parodontale: osso, dente, gengive, poi tasca e tartaro
+      const pd = ".perio-diagram";
+      if (document.querySelector(pd)) gsap.timeline({ scrollTrigger: { trigger: pd, start: "top 75%", once: true }, defaults: { ease: "power3.out" } })
+        .from(pd + " .d-heads > *", { opacity: 0, y: -8, duration: .5, stagger: .08 })
+        .from(pd + " .d-bone", { opacity: 0, y: 20, duration: .7 }, "-=.2")
+        .from(pd + " .d-tooth", { y: -70, opacity: 0, duration: .9 }, "-=.3")
+        .from(pd + " .d-gum", { opacity: 0, y: 12, duration: .6, stagger: .15 }, "-=.3")
+        .from(pd + " .d-pocket", { opacity: 0, scaleY: 0, transformOrigin: "50% 0%", duration: .7 }, "-=.1")
+        .from(pd + " .d-tartar circle", { opacity: 0, scale: 0, transformOrigin: "50% 50%", duration: .3, stagger: .06 }, "-=.3")
+        .from(pd + " .d-labels > *", { opacity: 0, duration: .4, stagger: .05 }, "-=.2")
+        .from(pd + " .diagram-legend li", { opacity: 0, x: 16, duration: .5, stagger: .12 }, "<");
+
       // Card e blocchi: entrano in sequenza quando arrivano in vista
-      [".solution-card", ".surgery-list li", ".tech-card", ".case-card", ".faq-item"].forEach(sel => {
+      // Le card in griglia entrano insieme (stessa altezza in ogni istante), gli elenchi in sequenza
+      [".solution-card", ".tech-card", ".case-card"].forEach(sel => {
         ScrollTrigger.batch(sel, {
           start: "top 88%", once: true,
-          onEnter: els => gsap.from(els, { opacity: 0, y: 36, duration: .8, stagger: .1, ease: "power3.out" })
+          onEnter: els => gsap.from(els, { opacity: 0, y: 36, duration: .8, ease: "power3.out", clearProps: "transform" })
+        });
+      });
+      [".surgery-list li", ".faq-item"].forEach(sel => {
+        ScrollTrigger.batch(sel, {
+          start: "top 88%", once: true,
+          onEnter: els => gsap.from(els, { opacity: 0, y: 36, duration: .8, stagger: .1, ease: "power3.out", clearProps: "transform" })
         });
       });
       gsap.utils.toArray(".step").forEach(step => {
